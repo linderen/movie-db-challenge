@@ -1,0 +1,47 @@
+<div class="row">
+  <%= form_with model: @movie do |form| %>
+  <div class="form-group">
+    <%= form.label :title, "Titel" %><br>
+    <%= form.text_field :title, :class => (@movie.errors.full_messages_for(:title).length > 0 ? 'form-control has-error' : 'form-control') %>
+    <% @movie.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, "Beskrivelse" %><br>
+    <%= form.text_area :description, :class => (@movie.errors.full_messages_for(:description).length > 0 ? 'form-control has-error' : 'form-control') %>
+    <% @movie.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :poster, "Poster" %><br>
+    <%= form.text_field :poster, :class => (@movie.errors.full_messages_for(:poster).length > 0 ? 'form-control has-error' : 'form-control') %>
+    <% @movie.errors.full_messages_for(:poster).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <label for="movie_search">OMDB link</label><br>
+    <%= form.hidden_field :omdb_id, class: 'form-control' %>
+    <div class="suggest" style="width:100%;">
+      <div class="input-group">
+         <input type="input" class="form-control" id="movie_search" value="<%= @omdb.present? ? @omdb.title : '' %>" placeholder="Søg...">
+         <span class="input-group-btn">
+           <button class="btn btn-default" type="button" id="populate_from_omdb">Brug OMDB data</button>
+         </span>
+         <div id="suggestion-result" class="suggest-items"></div>
+       </div>
+
+    </div>
+  </div>
+
+  <div>
+    <%= form.submit 'Gem', class: 'btn btn-default' %>
+  </div>
+  <% end %>
+</div>
+<%= javascript_include_tag params[:controller] %>

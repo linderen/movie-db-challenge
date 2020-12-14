@@ -1,0 +1,22 @@
+
+<div class="page-header">
+  <h1><%= @movie.title %><%= link_to 'Slet', @movie, method: :delete, class: 'btn btn-danger', data: { confirm: 'Er du sikker på du vil slette?' }, style: 'float:right;margin-left:10px;' %><%= link_to "Rediger", edit_movie_path(@movie), class: 'btn btn-warning', style: 'float:right;' %></h1>
+</div>
+<div class="row">
+  <div class="col-md-4"><%= movie_thumbnail(@movie, true) %></div>
+  <div class="col-md-8">
+    <% if @omdb.present? %>
+    <div class="row"><strong>OMDB Titel: </strong> <%= @omdb.title %></div>
+    <div class="row"><strong>År: </strong> <%= @omdb.year %></div>
+    <div class="row"><strong>IMDB Score: </strong> <%= @omdb.imdb_rating %> / 10</div>
+    <div class="row"><strong>Genre: </strong> <%= @omdb.genre %></div>
+    <div class="row"><strong>Instruktør: </strong> <%= @omdb.director %></div>
+    <div class="row"><strong>Skuespillere: </strong> <%= @omdb.actors %></div>
+    <div class="row"><strong>Metascore: </strong> <%= @omdb.metascore %> / 100</div>
+    <hr/>
+    <% end %>
+    <% if @movie.description.present? %>
+    <div class="row"><strong>Beskrivelse:</strong> <%= @movie.description %></div>
+    <% end %>
+  </div>
+</div>
